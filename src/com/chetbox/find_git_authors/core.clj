@@ -23,21 +23,23 @@
       (git "clone" "--bare" url (.getPath repo-path)))))
 
 (defn log-lines
-  [repo-path]
-  (git "log" (str "--format=format:" log-format) {:dir repo-path
-                                                  :seq true
-                                                  :buffer :line}))
+  [repo-path revisions]
+  (git "log" (str "--format=format:" log-format) revisions {:dir repo-path
+                                                            :seq true
+                                                            :buffer :line}))
 
 (defn print-authors!
-  [repo-url]
+  [repo-url revisions]
   (let [repo-path (url->local-path repo-url)]
     (pull! repo-path repo-url)
-    (doseq [author (distinct (log-lines repo-path))]
+    (doseq [author (distinct (log-lines repo-path revisions))]
       (println author))))
 
 (defn -main
   ( []
-    (println "Usage:\n  find-git-authors GIT_REPO_URL"))
+    (println "Usage:\n  find-git-authors GIT_REPO_URL [REVISION_RANGE]"))
   ( [repo-url]
-    (print-authors! repo-url)
+    (-main repo-url "origin/master"))
+  ( [repo-url revisions]
+    (print-authors! repo-url revisions)
     (System/exit 0)))
