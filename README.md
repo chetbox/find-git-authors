@@ -3,7 +3,7 @@
 Find all authors in a GitHub repo.
 
 ```
-lein run chetbox find-git-authors
+lein run https://github.com/chetbox/find-git-authors.git
 ```
 
 ## Requirements
@@ -12,7 +12,6 @@ lein run chetbox find-git-authors
 
 ## TODO
 
-- Support non-GitHub providers
 - *origin* option
 - *branch* option
 
