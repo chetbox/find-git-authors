@@ -39,7 +39,7 @@
   ( []
     (println "Usage:\n  find-git-authors GIT_REPO_URL [REVISION_RANGE]"))
   ( [repo-url]
-    (-main repo-url "origin/master"))
+    (-main repo-url "master"))
   ( [repo-url revisions]
     (print-authors! repo-url revisions)
     (System/exit 0)))
